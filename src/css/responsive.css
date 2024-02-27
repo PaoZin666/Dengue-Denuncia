@@ -1,0 +1,45 @@
+@media (max-width: 1200px) {
+
+.title{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background: #6d0000;
+  padding: 0px 0px 0px;
+}
+.title h1 {
+  color: #ffffff;
+  font-size: 40px;
+  z-index: 2;
+  -webkit-text-stroke: 4px rgba(0,0,0,0.2);
+}
+.title img{
+  width: 70px;
+  height: 70px;
+}
+
+.dados{
+  font-size: 10px;
+  padding: 8px 0px;
+}
+.dados p{
+  font-size: 15px;
+  padding: 5px 0px;
+}
+
+.redirect {
+  padding: 10px 0px;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+.redirect li{
+  justify-content: space-between;
+}
+.redirect h3{
+  padding: 10px 10px;
+}
+.forum img{
+  width: 40px;
+  height: 40px;
+}
+}
