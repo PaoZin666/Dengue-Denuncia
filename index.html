@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dengue Denuncia - CGC</title>
+    <link rel="shortcut icon" href="./src/img/kisspng-marsh-mosquitoes-malaria-mosquito-borne-disease-mo-mosquito-5ab6cc336d7220.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./src/css/reset.css">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="./src/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+	  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="title">
+        <h1>Dengue Denuncia</h1>
+        <img src="./src/img/kisspng-marsh-mosquitoes-malaria-mosquito-borne-disease-mo-mosquito-5ab6cc336d7220.4711568815219292674483.png">
+    </header>
+    <div class="dados">
+        <h1>Informações sobre Dengue em Salvador, Bahia em 2024</h1>
+        <p id="casosDengue"></p>
+    </div>
+       
+    <ul class="redirect">
+        <li><h3>Mais de 100 postos irão ofertar a vacina contra dengue em Salvador a partir desta quarta-feira (21)</h3><a href="http://www.saude.salvador.ba.gov.br/mais-de-100-postos-irao-ofertar-a-vacina-contra-dengue-em-salvador-a-partir-desta-quarta-feira-21/"><img src="./src/img/download.jpg"></a></li>
+        <li><h3>Vacinação contra dengue em Salvador tem horário estendido nesta quarta - iBahia</h3><a href="https://www.ibahia.com/noticias/saude/vacinacao-contra-dengue-em-salvador-tem-horario-estendido-nesta-quarta-314613"><img src="./src/img/download (1).jpg"></a></li>
+        <li><h3>Vacina contra dengue esgota na rede privada em Salvador</h3><a href="https://www.correio24horas.com.br/minha-bahia/vacina-contra-dengue-esgota-na-rede-privada-em-salvador-0224"><img src="./src/img/download (2).jpg"></a></li>
+        <li><h3>Vacinação contra dengue tem horário estendido em Salvador nesta quarta-feira (21)</h3><a href="http://www.saude.salvador.ba.gov.br/vacinacao-contra-dengue-tem-horario-estendido-em-salvador-nesta-quarta-feira-21/"><img src="./src/img/download (3).jpg"></a></li>
+    </ul>
+
+    <div class="forum" id="forum-button">
+        <a onclick="toggleChat()">
+          <img src="./src/img/—Pngtree—vector chat icon_4255634.png">
+        </a>
+      </div>
+      
+      <div class="chat-container" id="chat-container">
+        <div id="close-chat" onclick="toggleChat()">X</div>
+        <div class="chat">
+          <div class="message">Olá! Como podemos ajudar?</div>
+        </div>
+        <div id="chat-box"></div>
+        <div id="input-container">
+          <input type="text" placeholder="Digite sua mensagem..." class="chat-input" id="message-input">
+          <button class="send-button" onclick="sendMessage()">Enviar</button>
+        </div>
+      </div>
+      
+      <script>
+      
+        function toggleChat() {
+          var chatContainer = document.getElementById('chat-container');
+          var forumButton = document.getElementById('forum-button');
+      
+          if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+            chatContainer.style.display = 'block';
+            forumButton.style.display = 'none';
+          } else {
+            chatContainer.style.display = 'none';
+            forumButton.style.display = 'block';
+          }
+        }
+      
+        function sendMessage() {
+          var messageInput = document.getElementById('message-input');
+          var chatBox = document.getElementById('chat-box');
+          var newMessage = document.createElement('div');
+          newMessage.classList.add('message');
+          newMessage.textContent = messageInput.value;
+          chatBox.appendChild(newMessage);
+          messageInput.value = '';
+        }          
+        async function extrairCasosDengue() {
+            try {
+                const url = './src/csv/dengue_1-12.csv';
+                const response = await fetch(url);
+                const data = await response.text();
+                const linhas = data.split('\n');
+                let totalCasos = 0;
+                linhas.forEach(linha => {
+                    const colunas = linha.split(',');
+                    if (colunas.length > 5) {
+                        totalCasos += parseInt(colunas[5], 10) || 0;
+                    }
+                });
+                document.getElementById('casosDengue').textContent = `Total de casos de dengue até 23/02: ${totalCasos}`;
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        extrairCasosDengue();
+    </script>
+</body>
+</html>
